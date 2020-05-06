@@ -1,0 +1,79 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="CSS/header_style.css">
+		<link rel="stylesheet" href="CSS/account_style.css">
+		<link rel="stylesheet" href="CSS/footer_style.css">
+		<link rel="shortcut icon" href="images/shelter_icon.png" type="image/x-icon">
+		<title>
+			Beer shelter
+		</title>
+	</head>
+	<body>
+
+		{% include 'header.html' %}
+
+		<div class="main_block">
+			{% block content %}
+			<div class="account_info">
+				<div class="account_photo" style="background-image: url('{{account_photo}}')"></div>
+				<div class="account_id">
+					<a class="info_text">{{account_info.id}}</a>
+				</div>
+				<div class="account_user_status">
+					<a class="info_text">{{account_info.user_status}}</a>
+				</div>
+				<div class="account_user_rating">
+					<a class="info_text">{{account_info.user_rating}}</a>
+				</div>
+			</div>
+
+			<div class="account_publications_block">
+				<div class="publications_block_header">
+					publications <a class="publications_amount">{{account_info.publications_amount}}</a>
+				</div>
+
+				{% for publication in account_publications %}
+				<div class="small_publication">
+					<div class="publication_header">
+						<div class="publication_author_image" style="background-image: url('{{publication.author_image}}')"></div>
+						<div href="" class="publication_author">{{publication.author}}</div>
+						<div href="" class="publication_timestamp">{{publication.timestamp}}</div>
+						<div href="" class="publication_title">{{publication.title}}</div>
+					</div>
+				</div>
+				{% endfor %}
+			</div>
+
+			<div class="account_comments_block">
+				<div class="comments_block_header">
+					comments <a class="comments_amount">{{account_info.comments_amount}}</a>
+				</div>
+
+				{% for comment in account_comments %}
+				<div class="account_comment">
+					<div class="comment_header">
+						<div class="comment_header_high_row">
+							<a class="commented_publication_author">{{comment.commented_publication_author}}</a>
+							<a class="commented_publication_title">{{comment.commented_publication_title}}</a>
+						</div>
+						<div class="comment_header_low_row">
+							<a class="comment_author">{{comment.author}}</a>
+							<a class="comment_timestamp">{{comment.timestamp}}</a>
+						</div>
+					</div>
+					<div class="comment_text">
+						{{comment.text}}
+					</div>
+				</div>
+				{% endfor %}
+
+			</div>
+			{% endblock %}
+		</div>
+
+		{% include 'footer.html' %}
+		<script src="https://kit.fontawesome.com/5d6364b770.js" crossorigin="anonymous"></script>
+
+	</body>
+</html>

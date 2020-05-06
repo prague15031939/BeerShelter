@@ -1,0 +1,41 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="CSS/header_style.css">
+		<link rel="stylesheet" href="CSS/styles.css">
+		<link rel="stylesheet" href="CSS/footer_style.css">
+		<link rel="shortcut icon" href="images/shelter_icon.png" type="image/x-icon">
+		<title>
+			Beer shelter
+		</title>
+	</head>
+	<body>
+
+		{% include 'header.html' %}
+
+		<div class="main_block">
+			{% block content %}
+			
+			{% for publication in top_publications %}
+			<div class="publication">
+				<div class="publication_header">
+					<div class="publication_author_image" style="background-image: url('{{publication.author_photo_path}}')"></div>
+					<div href="" class="publication_author">{{publication.author}}</div>
+					<div href="" class="publication_timestamp">{{publication.timestamp}}</div>
+					<div href="" class="publication_title">{{publication.title}}</div>
+				</div>
+				<div class="publication_image">
+					<img src="{{publication.image_path}}">
+				</div>
+				<p class="publication_text">{{publication.text}}</p>
+			</div>
+			{% endfor %}
+			
+			{% endblock %}
+		</div>
+			
+		{% include 'footer.html' %}
+
+		<script src="https://kit.fontawesome.com/5d6364b770.js" crossorigin="anonymous"></script>
+	</body>
+</html>

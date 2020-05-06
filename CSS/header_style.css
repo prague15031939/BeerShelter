@@ -1,0 +1,54 @@
+.header {
+	background-color: #ffdc34;
+	font-family: gill sans mt;
+	font-size: 18px;
+	height: 50px;
+	display: grid;
+	grid-template-columns: repeat(12,1fr);
+}
+
+.shelter_href {
+	text-decoration: none;
+	color: black;
+}
+
+.site_logo {
+	font-size: 24px;
+	grid-column: 3;
+	margin-top: auto;
+    margin-bottom: auto;
+	text-align: center;
+}
+
+.navigation {
+	padding-top: 17px;
+	margin-left: 20px;
+	grid-column-start: 4;
+	grid-column-end: 10;
+}
+
+.navigation_link {
+	text-align: center;
+	text-decoration: none;
+	padding-right: 20px;
+	color: black;
+}
+
+.login_href {
+	margin-top: auto;
+    margin-bottom: auto;
+    margin-left: auto;
+    margin-right: auto;
+	grid-column: 10;
+}
+
+.account_icon {
+	width: 35px;
+	height: 35px;
+	border-radius: 50%;
+	background-size: cover;
+}
+
+.navigation_link:hover, .navigation_link:active, .navigation_link:focus {
+	color: #f72464;
+}
