@@ -64,7 +64,9 @@ body {
   cursor: pointer;
 }
 
-.logbtn:hover{
-  background: linear-gradient(120deg,#f72464,#ffdc34);
+@media (pointer: fine) and (hover: hover) {
+  .logbtn:hover{
+    background: linear-gradient(120deg,#f72464,#ffdc34);
+  }
 }
 
