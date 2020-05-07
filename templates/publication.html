@@ -18,48 +18,38 @@
 		{% block content %}
 
 		<div class="publication_container">
-		<div class="publication">
+			<div class="publication">
 
-			<div class="publication_header">
-				<div class="publication_author_image" style="background-image: url('{{publication.author_image}}')"></div>
-				<div href="" class="publication_author">{{publication.author}}</div>
-				<div href="" class="publication_timestamp">{{publication.timestamp}}</div>
-				<div href="" class="publication_title">{{publication.title}}</div>
-			</div>
-			<p class="publication_text">{{publication.text}}</p>
-			<div class="publication_image">
-				<img src="{{publication.image}}">
-			</div>
+				{% include 'publication_header.html' with {
+						'author_image': publication.author_image,
+						'author': publication.author,
+						'timestamp': publication.timestamp,
+						'title': publication.title, 
+					} 
+				%}
 
-			<div class="publication_footer">
-				<form action="publication.html" class="publication_footer_form">
-					<div class="like">
-						<div class="like_amount">{{publication.like_amount}}</div>
-						<button class='likebtn'><img src="images/heart.png"/></button>
-					</div>
-					<div class="txtb">
-        				<input type="text">
-        			</div>		
-        			<div class="send_comment">
-        				<button class="sendbtn"><img src="images/paper_plane.png"></button>
-        			</div>
-        		</form>
-			</div>
+				{% include 'publication_body.html' with {
+						'text': publication.text,
+						'image': publication.image,
+					}
+				%}
 
-		</div>
+				{% include 'publication_footer.html' with {
+						'like_amount': publication.like_amount, 
+					}
+				%}
+
+			</div>
 		</div>
 
 		<div class="comments_block">
 			{% for comment in comments %}
-			<div class="comment">
-				<div class="comment_header">
-					<a class="comment_author">{{comment.author}}</a>
-					<a class="comment_timestamp">{{comment.timestamp}}</a>
-				</div>
-				<div class="comment_text">
-					{{comment.text}}
-				</div>
-			</div>
+				{% include 'publication_comment.html' with {
+						'author': comment.author,
+						'timestamp': comment.timestamp,
+						'text': comment.text,
+					}
+				%}
 			{% endfor %}
 		</div>
 

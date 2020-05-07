@@ -14,19 +14,14 @@
 		{% include 'header.html' %}
 
 		<div class="main_block">
-			{% block content %}
-			<div class="account_info">
-				<div class="account_photo" style="background-image: url('{{account_photo}}')"></div>
-				<div class="account_id">
-					<a class="info_text">{{account_info.id}}</a>
-				</div>
-				<div class="account_user_status">
-					<a class="info_text">{{account_info.user_status}}</a>
-				</div>
-				<div class="account_user_rating">
-					<a class="info_text">{{account_info.user_rating}}</a>
-				</div>
-			</div>
+
+			{% include 'account_info.html' with {
+					'photo': account_info.photo,
+					'id': account_info.id,
+					'user_status': account_info.user_status,
+					'user_rating': account_info.user_rating,
+				}
+			%}
 
 			<div class="account_publications_block">
 				<div class="publications_block_header">
@@ -34,14 +29,17 @@
 				</div>
 
 				{% for publication in account_publications %}
-				<div class="small_publication">
-					<div class="publication_header">
-						<div class="publication_author_image" style="background-image: url('{{publication.author_image}}')"></div>
-						<div href="" class="publication_author">{{publication.author}}</div>
-						<div href="" class="publication_timestamp">{{publication.timestamp}}</div>
-						<div href="" class="publication_title">{{publication.title}}</div>
+
+					<div class="small_publication">
+						{% include 'publication_header.html' with {
+								'author_image': publication.author_image,
+								'author': publication.author,
+								'timestamp': publication.timestamp,
+								'title': publication.title, 
+							} 
+						%}
 					</div>
-				</div>
+
 				{% endfor %}
 			</div>
 
@@ -51,25 +49,20 @@
 				</div>
 
 				{% for comment in account_comments %}
-				<div class="account_comment">
-					<div class="comment_header">
-						<div class="comment_header_high_row">
-							<a class="commented_publication_author">{{comment.commented_publication_author}}</a>
-							<a class="commented_publication_title">{{comment.commented_publication_title}}</a>
-						</div>
-						<div class="comment_header_low_row">
-							<a class="comment_author">{{comment.author}}</a>
-							<a class="comment_timestamp">{{comment.timestamp}}</a>
-						</div>
-					</div>
-					<div class="comment_text">
-						{{comment.text}}
-					</div>
-				</div>
+
+					{% include 'account_comment.html' with {
+							'commented_publication_author': comment.commented_publication_author,
+							'commented_publication_title': comment.commented_publication_title,
+							'author': comment.author,
+							'timestamp': comment.timestamp,
+							'text': comment.text, 
+						} 
+					%}
+
 				{% endfor %}
 
 			</div>
-			{% endblock %}
+
 		</div>
 
 		{% include 'footer.html' %}
