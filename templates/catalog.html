@@ -11,7 +11,11 @@
 	</head>
 	<body>
 
-		{% include 'header.html' %}
+		{% include 'header.html' with {
+				'account_photo': account_photo,
+				'signed_in': signed_in,
+			}
+		%}
 
 		<div class="main_block">
 
@@ -21,17 +25,19 @@
 				{% include 'publication_header.html' with {
 						'author_image': publication.author_photo_path,
 						'author': publication.author,
+						'acc_id': publication.author_id,
 						'timestamp': publication.timestamp,
-						'title': publication.title, 
-					} 
+						'title': publication.title,
+						'publ_id': publication.publication_id,
+					}
 				%}
-				
+
 				{% include 'publication_body.html' with {
 						'text': publication.text,
 						'image': publication.image_path,
 					}
 				%}
-				
+
 			</div>
 			{% endfor %}
 

@@ -52,6 +52,7 @@ body {
 
 .logbtn {
   margin-top: 50px;
+  margin-bottom: 50px;
   border-radius: 5px;
   display: block;
   width: 100%;
@@ -70,3 +71,6 @@ body {
   }
 }
 
+.bottom_text {
+  text-align: center;
+}

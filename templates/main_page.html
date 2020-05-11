@@ -11,19 +11,24 @@
 	</head>
 	<body>
 
-		{% include 'header.html' %}
-
+		{% include 'header.html' with {
+				'account_photo': account_photo,
+				'signed_in': signed_in,
+			}
+		%}
 		<div class="main_block">
-			
+
 			{% for publication in top_publications %}
 			<div class="publication">
 
 				{% include 'publication_header.html' with {
 						'author_image': publication.author_photo_path,
 						'author': publication.author,
+						'acc_id': publication.author_id,
 						'timestamp': publication.timestamp,
-						'title': publication.title, 
-					} 
+						'title': publication.title,
+						'publ_id': publication.publication_id,
+					}
 				%}
 
 				{% include 'publication_body.html' with {
@@ -34,9 +39,9 @@
 
 			</div>
 			{% endfor %}
-			
+
 		</div>
-			
+
 		{% include 'footer.html' %}
 
 		<script src="https://kit.fontawesome.com/5d6364b770.js" crossorigin="anonymous"></script>

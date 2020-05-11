@@ -1,28 +1,39 @@
 <?php
 
-require_once 'vendor/autoload.php';
+require_once 'twig_init.php';
+require_once 'pdo.php';
 
-$loader = new Twig_Loader_Filesystem('templates');
-$twig = new Twig_Environment($loader, array(
-    'cache'       => 'compilation_cache',
-    'auto_reload' => true
-));
+session_start();
 
-$twig -> addGlobal('account_photo', 'images/avatar1.png');
+if ($_SESSION['hash'] != null || count($_GET) > 0) {
+    if (count($_GET) > 0) {
+      $account = get_user_account_by_id($db_shelter, $_GET['acc_id']);
+    }
+    else {
+      $account = get_user_account($db_shelter, $_SESSION['hash']);
+    }
+    $user_publications = get_user_publications($db_shelter, $account['user_id']);
+    $user_comments = get_user_comments($db_shelter, $account['user_id']);
 
-$account_info = array(
-	'photo' => 'images/avatar1.png', 'id' => 'prague15031939', 'user_status' => 'admin', 'user_rating' => 60, 'publications_amount' => 3, 'comments_amount' => 2,
-);
+    $twig -> addGlobal('account_photo', $account['image']);
+    $twig -> addGlobal('signed_in', true);
 
-$account_publications = array(
-	array('author' => 'Jason', 'author_image' => 'images/avatar1.png', 'timestamp' => '7:14', 'title' => 'Paulaner Hefe-Weisbeer', ),
-	array('author' => 'Robbie', 'author_image' => 'images/avatar2.png', 'timestamp' => '22:10', 'title' => 'Kult Крыніца', ),
-	array('author' => 'Kevin', 'author_image' => 'images/avatar3.png', 'timestamp' => '16:19', 'title' => 'Guiness Draught Stout', ),
-);
+    foreach ($user_publications as $publ) {
+      $account_publications[$i] = array('publication_id' => $publ['publication_id'], 'author' => $account['user_name'], 'author_id' => $account['user_id'], 'author_image' => $account['image'], 'timestamp' => $publ['timestamp'], 'title' => $publ['title'], );
+      $i++;
+    }
 
-$account_comments = array(
-	array('commented_publication_author' => 'Broky', 'commented_publication_title' => 'Tuborg', 'author' => 'prague15031939', 'timestamp' => '13:13', 'text' => 'Отвратительное водянистое зелёное пойло. Очень сильное ощущение разбавленного спирта. Голова трещит уже после 1.5 литров. ', ),
-	array('commented_publication_author' => 'Kitik', 'commented_publication_title' => 'Gambrinus', 'author' => 'prague15031939', 'timestamp' => '18:29', 'text' => 'Полностью поддерживаю. Отличное стабильное вкусное пиво. Прекрасный пивной аромат. Лучшее в среднем ценовом сегменте.', ),
-);
+    foreach ($user_comments as $comm) {
+      $account_comments[$i] = array('commented_publication_author' => $comm['re_author'], 'commented_publication_author_id' => $comm['re_author_id'], 'commented_publication_title' => $comm['re_publ_title'], 'commented_publication_id' => $comm['re_publ_id'], 'author' => $account['user_name'],
+        'author_id' => $account['user_id'], 'timestamp' => $comm['timestamp'], 'text' => $comm['text'], );
+      $i++;
+    }
 
-echo $twig->render('account.html', array('account_info' => $account_info, 'account_publications' => $account_publications, 'account_comments' => $account_comments));
+    $account_info = array('user_id' => $account['user_id'], 'photo' => $account['image'], 'user_name' => $account['user_name'], 'user_status' => $account['status'], 'user_rating' => $account['rating'], 'publications_amount' => count($user_publications), 'comments_amount' => count($user_comments),);
+
+    echo $twig->render('account.html', array('account_info' => $account_info, 'account_publications' => $account_publications, 'account_comments' => $account_comments));
+
+}
+else {
+  header('Location: http://'.$_SERVER['HTTP_HOST'].'/login.php');
+}

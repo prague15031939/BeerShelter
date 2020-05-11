@@ -21,21 +21,23 @@
 			<div class="publication">
 
 				{% include 'publication_header.html' with {
-						'author_image': publication.author_image,
+						'author_image': publication.author_photo_path,
 						'author': publication.author,
+						'acc_id': publication.author_id,
 						'timestamp': publication.timestamp,
-						'title': publication.title, 
-					} 
+						'title': publication.title,
+						'publ_id': publication.publication_id,
+					}
 				%}
 
 				{% include 'publication_body.html' with {
 						'text': publication.text,
-						'image': publication.image,
+						'image': publication.image_path,
 					}
 				%}
 
 				{% include 'publication_footer.html' with {
-						'like_amount': publication.like_amount, 
+						'like_amount': publication.like_amount,
 					}
 				%}
 
@@ -46,6 +48,7 @@
 			{% for comment in comments %}
 				{% include 'publication_comment.html' with {
 						'author': comment.author,
+						'acc_id': comment.author_id,
 						'timestamp': comment.timestamp,
 						'text': comment.text,
 					}

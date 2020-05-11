@@ -10,20 +10,22 @@
   </head>
   <body>
 
-    <form action="index.php" class="login-form">
+    <form action="login.php" class="login-form" method="POST">
       <h1>Login</h1>
 
       <a class="label">Username</a>
       <div class="txtb">
-        <input type="text">
+        <input type="text" name="username">
       </div>
 
       <a class="label">Password</a>
       <div class="txtb">
-        <input type="password">
+        <input type="password" name="password">
       </div>
 
       <input type="submit" class="logbtn" value="Sign in">
+
+      <div class="bottom_text">{{login_error_info.error}}</div>
     </form>
 
     {% include 'footer.html' %}

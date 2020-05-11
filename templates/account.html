@@ -11,13 +11,18 @@
 	</head>
 	<body>
 
-		{% include 'header.html' %}
+		{% include 'header.html' with {
+				'account_photo': account_photo,
+				'signed_in': signed_in,
+			}
+		%}
 
 		<div class="main_block">
 
 			{% include 'account_info.html' with {
 					'photo': account_info.photo,
-					'id': account_info.id,
+					'user_name': account_info.user_name,
+					'acc_id': account_info.user_id,
 					'user_status': account_info.user_status,
 					'user_rating': account_info.user_rating,
 				}
@@ -34,9 +39,11 @@
 						{% include 'publication_header.html' with {
 								'author_image': publication.author_image,
 								'author': publication.author,
+								'acc_id': publication.author_id,
 								'timestamp': publication.timestamp,
-								'title': publication.title, 
-							} 
+								'title': publication.title,
+								'publ_id': publication.publication_id,
+							}
 						%}
 					</div>
 
@@ -52,11 +59,14 @@
 
 					{% include 'account_comment.html' with {
 							'commented_publication_author': comment.commented_publication_author,
+							'commented_acc_id': comment.commented_publication_author_id,
 							'commented_publication_title': comment.commented_publication_title,
+							'commented_publ_id': comment.commented_publication_id,
 							'author': comment.author,
+							'acc_id': comment.author_id,
 							'timestamp': comment.timestamp,
-							'text': comment.text, 
-						} 
+							'text': comment.text,
+						}
 					%}
 
 				{% endfor %}
