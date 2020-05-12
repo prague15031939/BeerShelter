@@ -145,10 +145,44 @@ function is_user_registered($db, $hash_value) {
     $stmt = $db->prepare("SELECT count(*) AS num FROM `user_account` WHERE `user_hash` = ?");
     $stmt->execute(array($hash_value));
     $info = $stmt->fetch(PDO::FETCH_ASSOC);
-    if ($info['num'])
+    if ($info['num'] != 0)
       return true;
     else
       return false;
+  }
+  catch (PDOException $e) {
+    print "Error!: " . $e->getMessage();
+    die();
+  }
+}
+
+function is_user_unique($db, $username, $hash_value) {
+  if (!is_user_registered($db, $hash_value)) {
+    try {
+      $stmt = $db->prepare("SELECT count(*) AS num FROM `user_account` WHERE `user_name` = ?");
+      $stmt->execute(array($username));
+      $info = $stmt->fetch(PDO::FETCH_ASSOC);
+      if ($info['num'] == 0)
+        return true;
+      else
+        return false;
+    }
+    catch (PDOException $e) {
+      print "Error!: " . $e->getMessage();
+      die();
+    }
+  }
+  else {
+    return false;
+  }
+}
+
+function register_user($db, $user_name, $email, $avatar, $hash_value) {
+  try {
+    $data = array('username' => $user_name, 'userhash' => $hash_value, 'email' => $email, 'image' => $avatar, 'status' => 'user', 'rating' => 0);
+    $stmt = $db->prepare("INSERT INTO `user_account` SET `user_name` = :username, `user_hash` = :userhash, `email` = :email, `image` = :image, `status` = :status, `rating` = :rating");
+    $stmt->execute($data);
+    $insert_id = $db->lastInsertId();
   }
   catch (PDOException $e) {
     print "Error!: " . $e->getMessage();
