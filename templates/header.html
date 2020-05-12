@@ -2,7 +2,9 @@
 			<div class="site_logo"><a class="shelter_href" href="index.php">SHELTER</a></div>
 			<div class="navigation">
 				<a href="catalog.php" class="navigation_link">catalog</a>
-				<a href="" class="navigation_link">create</a>
+				{% if signed_in == true and status == 'admin' %}
+					<a href="" class="navigation_link">create</a>
+				{% endif %}
 				{% if signed_in == true %}
 					<a href="account.php" class="navigation_link">account</a>
 				{% endif %}

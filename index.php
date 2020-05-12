@@ -6,8 +6,8 @@ require_once 'pdo.php';
 session_start();
 
 if ($_SESSION['hash'] != null) {
-    $account = get_user_account($db_shelter, $_SESSION['hash']);
-    $twig -> addGlobal('account_photo', $account['image']);
+    $twig -> addGlobal('user_status', $_SESSION['user_status']);
+    $twig -> addGlobal('account_photo', $_SESSION['account_photo']);
     $twig -> addGlobal('signed_in', true);
 }
 else {
