@@ -82,9 +82,9 @@ function get_publication_comments($db, $publ_id) {
     $i = 0;
     while ($row = $stmt->fetch(PDO::FETCH_LAZY)) {
 
-      $stmt = $db->prepare("SELECT `user_name` FROM `user_account` WHERE `user_id` = ?");
-      $stmt->execute(array($row['author_id']));
-      $author_value = $stmt->fetch(PDO::FETCH_COLUMN);
+      $st = $db->prepare("SELECT `user_name` FROM `user_account` WHERE `user_id` = ?");
+      $st->execute(array($row['author_id']));
+      $author_value = $st->fetch(PDO::FETCH_COLUMN);
 
       $data[$i] = array('author_id' => $row['author_id'], 'author' => $author_value, 're_publ_id' => $row['re_publ_id'], 'timestamp' => $row['timestamp'], 'text' => $row['text']);
       $i++;
@@ -182,6 +182,18 @@ function register_user($db, $user_name, $email, $avatar, $hash_value) {
     $data = array('username' => $user_name, 'userhash' => $hash_value, 'email' => $email, 'image' => $avatar, 'status' => 'user', 'rating' => 0);
     $stmt = $db->prepare("INSERT INTO `user_account` SET `user_name` = :username, `user_hash` = :userhash, `email` = :email, `image` = :image, `status` = :status, `rating` = :rating");
     $stmt->execute($data);
+    $insert_id = $db->lastInsertId();
+  }
+  catch (PDOException $e) {
+    print "Error!: " . $e->getMessage();
+    die();
+  }
+}
+
+function add_comment($db, $data_arr) {
+  try {
+    $stmt = $db->prepare("INSERT INTO `full_comment` SET `author_id` = :author_id, `timestamp` = :timestamp, `re_publ_id` = :re_publ_id, `text` = :text");
+    $stmt->execute($data_arr);
     $insert_id = $db->lastInsertId();
   }
   catch (PDOException $e) {
