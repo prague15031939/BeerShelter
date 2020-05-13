@@ -1,0 +1,43 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<link rel="stylesheet" href="CSS/header_style.css">
+		<link rel="stylesheet" href="CSS/creator_style.css">
+		<link rel="stylesheet" href="CSS/footer_style.css">
+		<link rel="shortcut icon" href="images/shelter_icon.png" type="image/x-icon">
+		<title>
+			Beer shelter
+		</title>
+	</head>
+	<body>
+
+		{% include 'header.html' with {
+				'account_photo': account_photo,
+				'signed_in': signed_in,
+				'status': user_status,
+			}
+		%}
+
+    <div class="main_block">
+      <form action="creator.php" class="creator-form" method="POST">
+        <h1>Create a review</h1>
+
+        <div class="txtb">
+          <input type="text" name="title" placeholder="title">
+        </div>
+        <div class="txtb_large">
+          <textarea name="text" rows="18" cols="73" placeholder="text"></textarea>
+        </div>
+        <div class="txtb">
+          <input type="text" name="image" placeholder="image">
+        </div>
+
+        <input type="submit" class="createbtn" value="submit">
+      </form>
+    </div>
+
+		{% include 'footer.html' %}
+
+		<script src="https://kit.fontawesome.com/5d6364b770.js" crossorigin="anonymous"></script>
+	</body>
+</html>

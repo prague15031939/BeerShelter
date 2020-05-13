@@ -1,0 +1,98 @@
+body {
+	background-color: #edeef0;
+  font-family: gill sans mt;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+* {
+	margin: 0;
+	padding: 0;
+}
+
+.main_block {
+	margin-top: 20px;
+	margin-bottom: 10px;
+	margin-left: auto;
+  margin-right: auto;
+	background-color: #F8F8FF;
+	width: 600px;
+	border: 1px solid #DCDCDC;
+	border-radius: 5px;
+	text-align: left;
+}
+
+.creator-form {
+  height: 535px;
+  width: 90%;
+  margin-bottom: 10px;
+  margin-top: 30px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.creator-form h1 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.txtb, .txtb_large {
+  text-align: left;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 1px solid #DCDCDC;
+  border-radius: 5px;
+  position: relative;
+}
+
+.txtb input {
+  padding: 0 5px;
+  width: 400px;
+  height: 30px;
+  font-size: 15px;
+  color: black;
+  border: none;
+  width: 100%;
+  outline: none;
+  background: none;
+  font-size: 14px;
+  font-family: Trebuchet MS;
+}
+
+.txtb_large textarea {
+  padding: 2px 5px;
+  font-size: 15px;
+  color: black;
+  border: none;
+  width: 100%;
+  outline: none;
+  background: none;
+	overflow: hidden;
+	resize: none;
+  font-size: 14px;
+  font-family: Trebuchet MS;
+}
+
+.createbtn {
+  margin-right: auto;
+  margin-left: auto;
+  border-radius: 5px;
+  display: block;
+  width: 40%;
+  height: 40px;
+  border: none;
+	font-size: 16px;
+	font-family: gill sans mt;
+  background-color: #ffdc34;
+  background-size: 200%;
+  color: black;
+  outline: none;
+  cursor: pointer;
+}
+
+@media (pointer: fine) and (hover: hover) {
+  .createbtn:hover{
+    background: linear-gradient(120deg,#f72464,#ffdc34);
+  }
+}

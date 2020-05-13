@@ -201,3 +201,16 @@ function add_comment($db, $data_arr) {
     die();
   }
 }
+
+function add_publication($db, $data_arr) {
+  try {
+    $stmt = $db->prepare("INSERT INTO `full_publication` SET `author_id` = :author_id, `timestamp` = :timestamp, `title` = :title, `text` = :text, `image` = :image, `like_amount` = :like_amount");
+    $stmt->execute($data_arr);
+    $insert_id = $db->lastInsertId();
+    return $insert_id;
+  }
+  catch (PDOException $e) {
+    print "Error!: " . $e->getMessage();
+    die();
+  }
+}
