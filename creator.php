@@ -25,7 +25,7 @@ if ($_POST['title'] != '' && $_POST['text'] != '' && $_POST['image'] != '') {
   $account = get_user_account($db_shelter, $_SESSION['hash']);
   date_default_timezone_set('Europe/Minsk');
   $timestamp = date("Y-m-d H:i:s");
-  $res_publ_id = add_publication($db_shelter, array('author_id' => $account['user_id'], 'timestamp' => $timestamp, 'title' => $_POST['title'], 'text' => $_POST['text'], 'image' => $_POST['image'], 'like_amount' => 0));
+  $res_publ_id = add_publication($db_shelter, array('author_id' => $account['user_id'], 'timestamp' => $timestamp, 'title' => $_POST['title'], 'text' => $_POST['text'], 'image' => $_POST['image']));
   header('Location: http://'.$_SERVER['HTTP_HOST'].'/publication.php?publ_id='.$res_publ_id);
 }
 

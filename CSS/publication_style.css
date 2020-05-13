@@ -121,28 +121,35 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 	border-top: 1px solid #DCDCDC;
-	margin-bottom: 15px;
+
+	display: grid;
+	grid-template-columns: 15% 85%;
 }
 
 .publication_footer_form {
 	margin: 15px;
 	height: 27px;
+	grid-column: 2;
 
 	display: grid;
-	grid-template-columns: 15% 75% 10%;
+	grid-template-columns: 85% 15%;
 }
 
 .like {
 	grid-column: 1;
 
 	display: grid;
-	grid-template-columns: 50% 50%;
+	grid-template-columns: 60% 40%;
 }
 
 .txtb {
-	grid-column: 2;
+		grid-column: 1;
   	border: 1px solid #DCDCDC;
   	border-radius: 5px;
+}
+
+.send_comment {
+	grid-column: 2;
 }
 
 .txtb input {
@@ -158,16 +165,10 @@ body {
 }
 
 .like_amount {
-	grid-column: 1;
-
 	margin-top: auto;
 	margin-bottom: auto;
 	margin-right: 5px;
 	margin-left: auto;
-}
-
-.likebtn {
-	grid-column: 2;
 }
 
 .likebtn, .sendbtn {
@@ -175,14 +176,21 @@ body {
 	width: 27px;
 	border: none;
 	color: black;
-  	outline: none;
-  	cursor: pointer;
-  	background-color: #F8F8FF;
+  outline: none;
+  cursor: pointer;
+  background-color: #F8F8FF;
+	margin-top: auto;
+	margin-bottom: auto;
 }
 
-.likebtn img, .sendbtn img {
+.sendbtn img {
 	height: 27px;
 	width: 27px;
+}
+
+.likebtn img {
+	height: 22px;
+	width: 22px;
 }
 
 /*---------------------------------------------------------------------------------*/

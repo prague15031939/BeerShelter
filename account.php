@@ -25,6 +25,11 @@ if ($_SESSION['hash'] != null || count($_GET) > 0) {
     $user_publications = get_user_publications($db_shelter, $account['user_id']);
     $user_comments = get_user_comments($db_shelter, $account['user_id']);
 
+    $user_rating = 0;
+    foreach ($user_publications as $publ) {
+      $user_rating += get_like_amount($db_shelter, $publ['publication_id']);
+    }
+
     foreach ($user_publications as $publ) {
       $account_publications[$i] = array('publication_id' => $publ['publication_id'], 'author' => $account['user_name'], 'author_id' => $account['user_id'], 'author_image' => $account['image'], 'timestamp' => $publ['timestamp'], 'title' => $publ['title'], );
       $i++;
@@ -36,7 +41,7 @@ if ($_SESSION['hash'] != null || count($_GET) > 0) {
       $i++;
     }
 
-    $account_info = array('user_id' => $account['user_id'], 'photo' => $account['image'], 'user_name' => $account['user_name'], 'user_status' => $account['status'], 'user_rating' => $account['rating'], 'publications_amount' => count($user_publications), 'comments_amount' => count($user_comments),);
+    $account_info = array('user_id' => $account['user_id'], 'photo' => $account['image'], 'user_name' => $account['user_name'], 'user_status' => $account['status'], 'user_rating' => $user_rating, 'publications_amount' => count($user_publications), 'comments_amount' => count($user_comments),);
 
     echo $twig->render('account.html', array('account_info' => $account_info, 'account_publications' => $account_publications, 'account_comments' => $account_comments));
     return;
