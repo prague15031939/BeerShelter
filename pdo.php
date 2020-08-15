@@ -215,6 +215,19 @@ function add_publication($db, $data_arr) {
   }
 }
 
+function get_current_insert_id($db) {
+  try {
+    $stmt = $db->prepare("SELECT MAX(`publication_id`) AS max FROM `full_publication`");
+    $stmt->execute();
+    $info = $stmt->fetch(PDO::FETCH_ASSOC);
+    return $info['max'] + 1;
+  }
+  catch (PDOException $e) {
+    print "Error!: " . $e->getMessage();
+    die();
+  }
+}
+
 function correct_like($db, $user_id, $publ_id) {
   try {
     $stmt = $db->prepare("SELECT count(*) AS num FROM `publication_likes` WHERE `user_id` = ? AND `publ_id` = ?");

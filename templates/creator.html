@@ -19,7 +19,7 @@
 		%}
 
     <div class="main_block">
-      <form action="creator.php" class="creator-form" method="POST">
+      <form action="creator.php" enctype="multipart/form-data" class="creator-form" method="POST">
         <h1>Create a review</h1>
 
         <div class="txtb">
@@ -28,9 +28,17 @@
         <div class="txtb_large">
           <textarea name="text" rows="18" cols="73" placeholder="text"></textarea>
         </div>
-        <div class="txtb">
-          <input type="text" name="image" placeholder="image">
-        </div>
+
+				<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+
+				<div class="image_upload">
+					<input type="file" name="userfile" multiple accept="image/png,image/jpeg">
+				   <!-- <label for="file" class="btn btn-tertiary js-labelFile">
+				      <i class="icon fa fa-check"></i>
+				      <span class="js-fileName">upload an image</span>
+				    </label>
+				  </div>-->
+				 </div>
 
         <input type="submit" class="createbtn" value="submit">
       </form>
@@ -39,5 +47,26 @@
 		{% include 'footer.html' %}
 
 		<script src="https://kit.fontawesome.com/5d6364b770.js" crossorigin="anonymous"></script>
+
+	<!--	<script type="text/javascript">
+			(function() {
+
+				'use strict';
+
+				$('.input-file').each(function() {
+					var $input = $(this),
+					$label = $input.next('.js-labelFile'),
+					labelVal = $label.html();
+
+ 					$input.on('change', function(element) {
+						var fileName = '';
+						if (element.target.value) fileName = element.target.value.split('\\').pop();
+						fileName ? $label.addClass('has-file').find('.js-fileName').html(fileName) : $label.removeClass('has-file').html(labelVal);
+ 					});
+			});
+
+			})();
+		</script>-->
+
 	</body>
 </html>

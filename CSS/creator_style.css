@@ -46,6 +46,20 @@ body {
   position: relative;
 }
 
+.image_upload {
+	text-align: left;
+	margin-top: 20px;
+	margin-bottom: 20px;
+	position: relative;
+}
+
+/*.image_upload .btn-tertiary{color:#555;padding:0;line-height:40px;width:150px;display:block;border:1px solid #DCDCDC; border-radius: 5px;}
+.image_upload .btn-tertiary:hover,.image_upload .btn-tertiary:focus{color:#888;border-color:#888}
+.image_upload .input-file{width:.1px;height:.1px;opacity:0;overflow:hidden;position:absolute;z-index:-1}
+.image_upload .input-file + .js-labelFile{overflow:hidden;text-overflow:ellipsis;white-space:nowrap;padding:0 10px;cursor:pointer}
+.image_upload .input-file + .js-labelFile .icon:before{content:"\f093"}
+.image_upload .input-file + .js-labelFile.has-file .icon:before{content:"\f00c";color:#5AAC7B}*/
+
 .txtb input {
   padding: 0 5px;
   width: 400px;
